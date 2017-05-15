@@ -1,5 +1,5 @@
 package algorithms.mazeGenerators;
-
+//check
 /**
  * Created by idanr on 05/04/2017.
  */
