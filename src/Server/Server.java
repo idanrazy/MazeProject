@@ -15,4 +15,5 @@ public class Server {
         this.listeningInterval = listeningInterval;
         this.serverStrategy = serverStrategy;
     }
+    
 }
