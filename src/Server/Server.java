@@ -51,8 +51,8 @@ public class Server {
             System.out.println("Client excepted!");
             serverStrategy.serverStrategy(aClient.getInputStream(), aClient.getOutputStream());
             aClient.getInputStream().close();
-            aClient.getOutputStream().close();
-            aClient.close();
+//            aClient.getOutputStream().close();
+//            aClient.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
