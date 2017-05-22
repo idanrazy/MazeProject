@@ -39,6 +39,7 @@ public class MyDecompressorInputStream extends InputStream {
             }
 
         }
+        int a;
         return c;
     }
 }
