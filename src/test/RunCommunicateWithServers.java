@@ -33,7 +33,6 @@ public class RunCommunicateWithServers {
 
       //  CommunicateWithServer_SolveSearchProblem();
         //CommunicateWithServer_StringReverser();
-
         //Stopping all servers
         mazeGeneratingServer.stop();
       //  solveSearchProblemServer.stop();
