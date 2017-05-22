@@ -1,8 +1,10 @@
 package test;
 
+import Client.Client;
+import Client.IClientStrategy;
 import IO.MyDecompressorInputStream;
-import Server.*;
-import Client.*;
+import Server.Server;
+import Server.ServerStrategyGenerateMaze;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.search.AState;
@@ -20,22 +22,21 @@ public class RunCommunicateWithServers {
     public static void main(String[] args) {
         //Initializing servers
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
-        //Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+        Server solveSearchProblemServer = new Server(5401, 1000, new Server.ServerStrategySolveSearchProblem());
         //Server stringReverserServer = new Server(5402, 1000, new ServerStrategyStringReverser());
 
         //Starting  servers
-        //solveSearchProblemServer.start();
+        solveSearchProblemServer.start();
         mazeGeneratingServer.start();
         //stringReverserServer.start();
 
         //Communicating with servers
-        CommunicateWithServer_MazeGenerating();
-
-      //  CommunicateWithServer_SolveSearchProblem();
-        //CommunicateWithServer_StringReverser();
+                CommunicateWithServer_MazeGenerating();
+                CommunicateWithServer_SolveSearchProblem();
+          //CommunicateWithServer_StringReverser();
         //Stopping all servers
         mazeGeneratingServer.stop();
-      //  solveSearchProblemServer.stop();
+        solveSearchProblemServer.stop();
         //stringReverserServer.stop();
     }
 

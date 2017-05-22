@@ -48,12 +48,17 @@ public class Server {
 
     private void handleClient(Socket aClient) {
         try {
+            Thread.sleep(5000);
             System.out.println("Client excepted!");
             serverStrategy.serverStrategy(aClient.getInputStream(), aClient.getOutputStream());
             aClient.getInputStream().close();
-//            aClient.getOutputStream().close();
-//            aClient.close();
+          //  aClient.getOutputStream().close();
+          //  aClient.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
     }
