@@ -1,9 +1,11 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
+
 /**
  * Create Position rePresented with row value and col value.
  */
-public class Position {
+public class Position implements Serializable {
 
    private int RowIndex;
    private int ColumIndex;

@@ -20,6 +20,7 @@ public class RunMazeGenerator {
         // prints the maze
         maze.print();
 
+
         // get the maze entrance
         Position startPosition = maze.getStartPosition();
 
