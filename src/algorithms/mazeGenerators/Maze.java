@@ -1,11 +1,12 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Create Maze object
  */
-public class Maze {
+public class Maze implements Serializable {
     private int Rows;
     private int Cols;
     private Position start_point;
@@ -204,5 +205,16 @@ public class Maze {
             }
         }
         return ans;
+    }
+
+    @Override
+    public String toString() {
+        String s ="";
+        for(int i=0;i<Maze.length;i++){
+            for(int j=0;j<Maze[i].length;j++){
+                s=s+Maze[i][j];
+            }
+        }
+        return  s;
     }
 }

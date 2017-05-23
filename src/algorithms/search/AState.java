@@ -1,9 +1,11 @@
 package algorithms.search;
 
+import java.io.Serializable;
+
 /**
  * State represent a situation in Searching Problem
  */
-public  abstract class AState {
+public  abstract class AState implements Serializable {
     /**
      * state String represent situation
      * cost value to get to the state
@@ -14,6 +16,12 @@ public  abstract class AState {
     private AState _father;
     private double distance;
 
+    /**
+     * Constructor
+     */
+    public AState(){
+
+    }
 
     /**
      * Constructor

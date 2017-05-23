@@ -1,9 +1,11 @@
 package algorithms.search;
 
+import java.io.Serializable;
+
 /**
  * Create Maze State with row and col index
  */
-public class MazeState extends AState {
+public class MazeState extends AState implements Serializable {
     /**
      * Create Maze State with row and col index
      * @param row value of current row
@@ -22,4 +24,5 @@ public class MazeState extends AState {
     public MazeState(int row , int col,double cost) {
         super(String.format("{%s,%s}",row,col),cost);
     }
+
 }
