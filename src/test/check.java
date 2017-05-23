@@ -20,7 +20,7 @@ public class check {
         String path = System.getProperty("java.io.tmpdir");
         //read maze form the claint
         int hash = maze.toString().hashCode();
-
+        //add
         String FilePath = path + "\\" + hash;
         ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(FilePath));
     }
