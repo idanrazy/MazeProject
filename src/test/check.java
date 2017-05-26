@@ -2,6 +2,9 @@ package test;
 
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.search.BreadthFirstSearch;
+import algorithms.search.SearchableMaze;
+import algorithms.search.Solution;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -10,8 +13,7 @@ import java.io.ObjectOutputStream;
  * Created by idanr on 15/05/2017.
  */
 public class check {
-    public static void main(String[] args) {
-
+    public static Maze checkmaze(){
     try {
         MyMazeGenerator mg = new MyMazeGenerator();
         Maze maze = mg.generate(50, 50);
@@ -22,12 +24,19 @@ public class check {
         int hash = maze.toString().hashCode();
         //add
         String FilePath = path + "\\" + hash;
+        SearchableMaze searchableMaze = new SearchableMaze(maze);
+        Solution s = new BreadthFirstSearch().solve(searchableMaze);
         ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(FilePath));
+        write.writeObject(s);
+        write.flush();
+        write.close();
+        return maze;
     }
     catch (Exception e){
         e.printStackTrace();
     }
 
+        return null;
     }
 }
 

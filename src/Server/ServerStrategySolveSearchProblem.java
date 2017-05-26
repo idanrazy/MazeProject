@@ -30,7 +30,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
             Solution s;
             String FilePath = path+"\\"+hash;
-            if(new File(path,FilePath).exists())
+            if(new File(path,""+hash).exists())
             {
                 System.out.println("Solution was calculated before");
                 ObjectInputStream read = new ObjectInputStream((new FileInputStream(FilePath)));
@@ -44,6 +44,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                 s = new BreadthFirstSearch().solve(searchableMaze);
                 ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(FilePath));
                 write.writeObject(s);
+                write.flush();
                 write.close();
 
 
