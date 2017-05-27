@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by idanr on 14/05/2017.
@@ -30,16 +32,26 @@ public class Server {
         try {
             ServerSocket server = new ServerSocket(port);
             server.setSoTimeout(listeningInterval);
+            ExecutorService executor = Executors.newCachedThreadPool();
             while (!stop) {
                 try {
                     Socket aClient = server.accept(); // blocking call
+                    /*
                     new Thread(() -> {
                         handleClient(aClient);
                     }).start();
+                    */
+                    executor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            handleClient(aClient);
+                        }
+                    });
                 } catch (SocketTimeoutException e) {
                     //System.out.println("SocketTimeout!");
                 }
             }
+            executor.shutdown();
             server.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,7 +75,6 @@ public class Server {
         }
 */
     }
-
     public void stop() {
         System.out.println("Stopping server..");
         stop = true;
