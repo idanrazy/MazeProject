@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by idanr on 14/05/2017.
  */
+//add to client 
 public class Server {
     private int port;
     private int listeningInterval;
