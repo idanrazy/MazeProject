@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by idanr on 14/05/2017.
  */
-//add to client 
+//add to client
 public class Server {
     private int port;
     private int listeningInterval;
@@ -61,7 +61,7 @@ public class Server {
 
     private void handleClient(Socket aClient) {
         try {
-//            Thread.sleep(5000);
+            //         Thread.sleep(3000);
             System.out.println("Client excepted!");
             serverStrategy.serverStrategy(aClient.getInputStream(), aClient.getOutputStream());
 //            aClient.getInputStream().close();
@@ -70,11 +70,12 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-/*        catch (InterruptedException e)
+/*       catch (InterruptedException e)
         {
             e.printStackTrace();
         }
 */
+
     }
     public void stop() {
         System.out.println("Stopping server..");

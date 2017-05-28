@@ -215,6 +215,6 @@ public class Maze implements Serializable {
                 s=s+Maze[i][j];
             }
         }
-        return  s;
+        return  s+start_point.toString()+end_point.toString();
     }
 }
