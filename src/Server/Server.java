@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -29,11 +28,11 @@ public class Server {
         this.serverStrategy = serverStrategy;
 
         //load properties
-         prop = new Properties();
+        Properties prop = new Properties();
          try {
              input = new FileInputStream("config.properties");
-             prop.load(input);
-             String t =prop.getProperty("MaxThread");
+             prop.prop.load(input);
+             String t =prop.prop.getProperty("MaxThread");
              MaxThread = Integer.parseInt(t);
 
          }

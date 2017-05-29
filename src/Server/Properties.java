@@ -9,7 +9,7 @@ import java.io.OutputStream;
  */
 public class Properties {
 
-    java.util.Properties prop = new java.util.Properties();
+    public java.util.Properties prop = new java.util.Properties();
     OutputStream output = null;
     public  Properties(){
         try {
