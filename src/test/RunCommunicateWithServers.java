@@ -28,11 +28,11 @@ public class RunCommunicateWithServers {
 
         //Starting  servers
         solveSearchProblemServer.start();
-        //mazeGeneratingServer.start();
+        mazeGeneratingServer.start();
         //stringReverserServer.start();
 
         //Communicating with servers
-        //CommunicateWithServer_MazeGenerating();
+        CommunicateWithServer_MazeGenerating();
         CommunicateWithServer_SolveSearchProblem();
         //CommunicateWithServer_StringReverser();
 
@@ -82,7 +82,7 @@ public class RunCommunicateWithServers {
                         toServer.flush();
 
                         MyMazeGenerator mg = new MyMazeGenerator();
-                        Maze maze = mg.generate(3, 3);
+                        Maze maze = mg.generate(50, 50);
 
                         //Maze maze = check.checkmaze();
                         maze.print();

@@ -1,9 +1,12 @@
 package Server;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -16,12 +19,28 @@ public class Server {
     private int listeningInterval;
     private IServerStrategy serverStrategy;
     private volatile boolean stop;
-
+    private java.util.Properties prop;
+    private InputStream input = null;
+    private int MaxThread;
 
     public Server(int port, int listeningInterval, IServerStrategy serverStrategy) {
         this.port = port;
         this.listeningInterval = listeningInterval;
         this.serverStrategy = serverStrategy;
+
+        //load properties
+         prop = new Properties();
+         try {
+             input = new FileInputStream("config.properties");
+             prop.load(input);
+             String t =prop.getProperty("MaxThread");
+             MaxThread = Integer.parseInt(t);
+
+         }
+         catch (IOException e){
+             e.printStackTrace();
+         }
+
     }
     public void start() {
         new Thread(() -> {
@@ -33,7 +52,7 @@ public class Server {
         try {
             ServerSocket server = new ServerSocket(port);
             server.setSoTimeout(listeningInterval);
-            ExecutorService executor = Executors.newCachedThreadPool();
+            ExecutorService executor = Executors.newFixedThreadPool(MaxThread);
             while (!stop) {
                 try {
                     Socket aClient = server.accept(); // blocking call
@@ -64,7 +83,7 @@ public class Server {
             //         Thread.sleep(3000);
             System.out.println("Client excepted!");
             serverStrategy.serverStrategy(aClient.getInputStream(), aClient.getOutputStream());
-//            aClient.getInputStream().close();
+//           aClient.getInputStream().close();
 //            aClient.getOutputStream().close();
             aClient.close();
         } catch (IOException e) {

@@ -1,21 +1,18 @@
 package Server;
 
 import algorithms.mazeGenerators.Maze;
-import algorithms.search.BreadthFirstSearch;
-import algorithms.search.SearchableMaze;
-import algorithms.search.Solution;
+import algorithms.search.*;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by idanr on 22/05/2017.
  */
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
-    Map<Integer,String> DicMap;
+    public enum SALG{
+     BreadthFirstSearch,DepthFirstSearch,BestFirstSearch
+    }
     public ServerStrategySolveSearchProblem(){
-        DicMap = new HashMap<>();
 
     }
     @Override
@@ -24,11 +21,16 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
             String path = System.getProperty("java.io.tmpdir");
+            //read properties
+            java.util.Properties prop = new java.util.Properties();
+            InputStream input = new FileInputStream("config.properties");
+            prop.load(input);
+            String Searchalg = prop.getProperty("SearchAlg");
             //read maze form the claint
             Maze m = (Maze)fromClient.readObject();
             int hash = m.toString().hashCode();
 
-            Solution s;
+            Solution s = null;
             String FilePath = path+"\\"+hash;
             if(new File(path,""+hash).exists())
             {
@@ -41,7 +43,14 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             else {
                 System.out.println("Solution was add to Directory");
                 SearchableMaze searchableMaze = new SearchableMaze(m);
-                s = new BreadthFirstSearch().solve(searchableMaze);
+                switch (Searchalg){
+                    case("BreadthFirstSearch"):
+                        s = new BreadthFirstSearch().solve(searchableMaze);
+                    case("BestFirstSearch"):
+                        s = new BestFirstSearch().solve(searchableMaze);
+                    case("DepthFirstSearch"):
+                        s = new DepthFirstSearch().solve(searchableMaze);
+                }
                 ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(FilePath));
                 write.writeObject(s);
                 write.flush();

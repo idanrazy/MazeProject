@@ -4,13 +4,19 @@ import IO.MyCompressorOutputStream;
 import algorithms.mazeGenerators.IMazeGenerator;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
+import algorithms.mazeGenerators.SimpleMazeGenerator;
 
 import java.io.*;
+import java.util.Properties;
 
 /**
  * Created by idanr on 14/05/2017.
  */
 public class ServerStrategyGenerateMaze implements IServerStrategy {
+
+    public enum GALG{
+      MyMazeGenerator,SimpleMazeGenerator
+    }
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
@@ -19,10 +25,20 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             System.out.println("check");
         //covert client command to generate maze
             int[] a;
+            IMazeGenerator mgen = null;
             if (fromClient != null ){
                 try {
+                    java.util.Properties prop = new Properties();
+                    InputStream input = new FileInputStream("config.properties");
+                    prop.load(input);
+                    String Generate = prop.getProperty("GenerateAlg");
                     a =(int[])fromClient.readObject();
-                    IMazeGenerator mgen = new MyMazeGenerator();
+                    switch (Generate){
+                        case("MyMazeGenerator"):
+                             mgen = new MyMazeGenerator();
+                        case("SimpleMazeGenerator"):
+                             mgen = new SimpleMazeGenerator();
+                    }
                     Maze maze = mgen.generate(a[0],a[1]);
                     byte[] bm = maze.toByteArray();
                     // decode with part A
