@@ -34,10 +34,12 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
                     String Generate = prop.getProperty("GenerateAlg");
                     a =(int[])fromClient.readObject();
                     switch (Generate){
-                        case("MyMazeGenerator"):
+                        case "MyMazeGenerator":
                              mgen = new MyMazeGenerator();
-                        case("SimpleMazeGenerator"):
+                             break;
+                        case "SimpleMazeGenerator":
                              mgen = new SimpleMazeGenerator();
+                             break;
                     }
                     Maze maze = mgen.generate(a[0],a[1]);
                     byte[] bm = maze.toByteArray();

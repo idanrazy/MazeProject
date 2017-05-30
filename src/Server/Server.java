@@ -1,5 +1,6 @@
 package Server;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,11 +29,15 @@ public class Server {
         this.serverStrategy = serverStrategy;
 
         //load properties
-        Properties prop = new Properties();
+        File f = new File("./config.properties");
+        Properties prop;
+        if(!f.exists())
+             prop = new Properties();
          try {
              input = new FileInputStream("config.properties");
-             prop.prop.load(input);
-             String t =prop.prop.getProperty("MaxThread");
+             java.util.Properties prop1 = new java.util.Properties();
+             prop1.load(input);
+             String t =prop1.getProperty("MaxThread");
              MaxThread = Integer.parseInt(t);
 
          }

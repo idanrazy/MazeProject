@@ -13,6 +13,7 @@ public class Properties {
     OutputStream output = null;
     public  Properties(){
         try {
+
             output = new FileOutputStream("config.properties");
             prop.setProperty("GenerateAlg","MyMazeGenerator");
             prop.setProperty("SearchAlg","BestFirstSearch");

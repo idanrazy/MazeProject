@@ -46,10 +46,13 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                 switch (Searchalg){
                     case("BreadthFirstSearch"):
                         s = new BreadthFirstSearch().solve(searchableMaze);
+                        break;
                     case("BestFirstSearch"):
                         s = new BestFirstSearch().solve(searchableMaze);
+                        break;
                     case("DepthFirstSearch"):
                         s = new DepthFirstSearch().solve(searchableMaze);
+                        break;
                 }
                 ObjectOutputStream write = new ObjectOutputStream(new FileOutputStream(FilePath));
                 write.writeObject(s);
