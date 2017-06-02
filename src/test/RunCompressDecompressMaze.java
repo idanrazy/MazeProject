@@ -13,6 +13,8 @@ import java.util.Arrays;
  * Created by Aviadjo on 3/26/2017.
  */
 public class RunCompressDecompressMaze {
+
+    //check 
     public static void main(String[] args) {
 
         String mazeFileName = "savedMaze.maze";
