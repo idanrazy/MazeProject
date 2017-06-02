@@ -1,9 +1,6 @@
 package Server;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
@@ -22,6 +19,37 @@ public class Server {
     private java.util.Properties prop;
     private InputStream input = null;
     private int MaxThread;
+    public static class Properties {
+
+        public java.util.Properties prop = new java.util.Properties();
+        OutputStream output = null;
+        public  Properties(){
+            try {
+
+                output = new FileOutputStream("config.properties");
+                prop.setProperty("GenerateAlg","MyMazeGenerator");
+                prop.setProperty("SearchAlg","BestFirstSearch");
+                prop.setProperty("MaxThread","10");
+                prop.store(output,null);
+
+
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+            finally {
+                if(output!=null)
+                    try{
+                        output.close();
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+            }
+        }
+
+    }
+
 
     public Server(int port, int listeningInterval, IServerStrategy serverStrategy) {
         this.port = port;
