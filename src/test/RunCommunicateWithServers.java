@@ -28,15 +28,16 @@ public class RunCommunicateWithServers {
 
         //Starting  servers
         solveSearchProblemServer.start();
-        //mazeGeneratingServer.start();
+        mazeGeneratingServer.start();
         //stringReverserServer.start();
 
         //Communicating with servers
-        //CommunicateWithServer_MazeGenerating();
+        CommunicateWithServer_MazeGenerating();
         CommunicateWithServer_SolveSearchProblem();
-          //CommunicateWithServer_StringReverser();
+        //CommunicateWithServer_StringReverser();
+
         //Stopping all servers
-        //mazeGeneratingServer.stop();
+        mazeGeneratingServer.stop();
         solveSearchProblemServer.stop();
         //stringReverserServer.stop();
     }
@@ -50,7 +51,7 @@ public class RunCommunicateWithServers {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        int[] mazeDimensions = new int[]{50,50};
+                        int[] mazeDimensions = new int[]{50, 50};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
                         toServer.flush();
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
@@ -64,7 +65,7 @@ public class RunCommunicateWithServers {
                     }
                 }
             });
-            client.start();
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -79,8 +80,11 @@ public class RunCommunicateWithServers {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
+
                         MyMazeGenerator mg = new MyMazeGenerator();
                         Maze maze = mg.generate(50, 50);
+
+                        //Maze maze = check.checkmaze();
                         maze.print();
                         toServer.writeObject(maze); //send maze to server
                         toServer.flush();
@@ -97,7 +101,7 @@ public class RunCommunicateWithServers {
                     }
                 }
             });
-            client.start();
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -126,7 +130,7 @@ public class RunCommunicateWithServers {
                     }
                 }
             });
-            client.start();
+            client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
