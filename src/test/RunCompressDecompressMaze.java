@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class RunCompressDecompressMaze {
 
-    //check 
+    //check
     public static void main(String[] args) {
 
         String mazeFileName = "savedMaze.maze";
