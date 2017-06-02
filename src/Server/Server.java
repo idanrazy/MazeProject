@@ -74,7 +74,7 @@ public class Server {
          }
 
     }
-    public void start() {
+    public void start()  {
         new Thread(() -> {
             runServer();
         }).start();
