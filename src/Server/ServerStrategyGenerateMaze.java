@@ -14,9 +14,12 @@ import java.util.Properties;
  */
 public class ServerStrategyGenerateMaze implements IServerStrategy {
 
-    public enum GALG{
-      MyMazeGenerator,SimpleMazeGenerator
-    }
+
+    /**
+     * @param inFromClient input to the server
+     * @param outToClient  output from the server
+     * thw stragety that the server work with
+     */
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {

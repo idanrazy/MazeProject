@@ -11,10 +11,18 @@ public class MyCompressorOutputStream extends OutputStream {
     int counter;
     int place;
 
+    /**
+     * @param OS the output stream
+     */
     public MyCompressorOutputStream(OutputStream OS){
         out=OS;
     }
 
+    /**
+     * @param b the integer need to write
+     * @throws IOException
+     * check b and write it outside
+     */
     public void write(int b) throws IOException {
         if(b==prevB){
             counter++;
@@ -48,6 +56,11 @@ public class MyCompressorOutputStream extends OutputStream {
         }*/
     }
 
+    /**
+     * @param arr byte array to write out
+     * @throws IOException
+     * send evry byte at the array to check dunction 'write'
+     */
     public void write(byte[] arr) throws IOException {
         if(arr.length>0){
             prevB=arr[0];
@@ -59,6 +72,10 @@ public class MyCompressorOutputStream extends OutputStream {
         }
     }
 
+    /**
+     * @param b byte array to check
+     * method that check how to initilaize the array if bigger than 254
+     */
     private void initilaizeArray(byte[] b){
         int length;
         //can write only until 255 byte

@@ -16,7 +16,7 @@ public class check {
     public static Maze checkmaze(){
     try {
         MyMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(50, 50);
+        Maze maze = mg.generate(2, 3);
         //  ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
         //  ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
         String path = System.getProperty("java.io.tmpdir");

@@ -10,11 +10,19 @@ public class MyDecompressorInputStream extends InputStream {
     int counter;
     int prevB;
 
+    /**
+     * @param IN input stream
+     * constructor for the class
+     */
     public MyDecompressorInputStream(InputStream IN){
         in=IN;
         counter=0;
     }
 
+    /**
+     * @return the output from the file
+     * @throws IOException
+     */
     @Override
     public int read() throws IOException {
         byte[] fromFile = new byte[1];
@@ -23,6 +31,11 @@ public class MyDecompressorInputStream extends InputStream {
         return fromFile[0];
     }
 
+    /**
+     * @param b read to byte array
+     * @return a
+     * @throws IOException
+     */
     public int read(byte[] b) throws IOException {
         byte[] fromFile = new byte[1];
         int c=0;

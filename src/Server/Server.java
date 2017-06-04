@@ -19,6 +19,10 @@ public class Server {
     private java.util.Properties prop;
     private InputStream input = null;
     private int MaxThread;
+
+    /**
+     * choose the properties that enter
+     */
     public static class Properties {
 
         public java.util.Properties prop = new java.util.Properties();
@@ -51,6 +55,11 @@ public class Server {
     }
 
 
+    /**
+     * @param port the server port
+     * @param listeningInterval  time to check if there is new client
+     * @param serverStrategy the server stragety how to handle the client
+     */
     public Server(int port, int listeningInterval, IServerStrategy serverStrategy) {
         this.port = port;
         this.listeningInterval = listeningInterval;
@@ -74,14 +83,28 @@ public class Server {
          }
 
     }
+
+    /**
+     * start the server
+     */
     public void start()  {
 
         //change to executor
-        new Thread(() -> {
+        /*new Thread(() -> {
             runServer();
-        }).start();
+        }).start();*/
+        ExecutorService executor1 = Executors.newSingleThreadExecutor();
+        executor1.execute(new Runnable() {
+            @Override
+            public void run() {
+                runServer();
+            }
+        });
     }
 
+    /**
+     * run new thread for each new client
+     */
     private void runServer() {
         try {
             ServerSocket server = new ServerSocket(port);
@@ -112,6 +135,10 @@ public class Server {
         }
     }
 
+    /**
+     * @param aClient the socket of the client
+     * handle each client with stragety
+     */
     private void handleClient(Socket aClient) {
         try {
             //         Thread.sleep(3000);
@@ -130,6 +157,10 @@ public class Server {
 */
 
     }
+
+    /**
+     * stopping the server
+     */
     public void stop() {
         System.out.println("Stopping server..");
         stop = true;

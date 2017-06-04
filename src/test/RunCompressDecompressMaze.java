@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class RunCompressDecompressMaze {
 
-        try {
+        /*try {
             // save maze to a file
             OutputStream out = new MyCompressorOutputStream(new FileOutputStream(mazeFileName));
             out.write(maze.toByteArray());
@@ -39,5 +39,5 @@ public class RunCompressDecompressMaze {
 
         boolean areMazesEquals = Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals)); //maze should be equal to loadedMaze
-    }
+    }*/
 }

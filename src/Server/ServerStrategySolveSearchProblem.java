@@ -9,12 +9,19 @@ import java.io.*;
  * Created by idanr on 22/05/2017.
  */
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
-    public enum SALG{
-     BreadthFirstSearch,DepthFirstSearch,BestFirstSearch
-    }
+
+    /**
+     * empty constructor
+     */
     public ServerStrategySolveSearchProblem(){
 
     }
+
+    /**
+     * @param inFromClient input to the sever
+     * @param outToClient  output from the server
+     * the stragety that the server work with
+     */
     @Override
     public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
